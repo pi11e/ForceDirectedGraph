@@ -12,6 +12,8 @@ public class ForceDirectedGraph extends PApplet
 	public static void main(String args[]) {
 	    PApplet.main(new String[] { "--present", "de.tudresden.mg.slub.ForceDirectedGraph" });
 	  }
+	
+	private int amountOfClusters = 3;
 
 	// Reference to physics world
 	public VerletPhysics2D physics;
@@ -55,7 +57,7 @@ public class ForceDirectedGraph extends PApplet
 	    Vec2D center = new Vec2D(width/2,height/2);
 	    
 	    
-	    clusters.add(new Cluster(this, (int)random(3,8),(float)random(20,100),center));
+	    clusters.add(new Cluster(this, amountOfClusters,(float)random(20,100),center));
 	  }
 
 	  //	All clusters connect to all clusters	
@@ -101,21 +103,28 @@ public class ForceDirectedGraph extends PApplet
 	  // Instructions
 	  fill(0);
 	  textFont(f);
-	  text("'p' to display or hide particles\n'c' to display or hide connections\n'n' for new graph",10,20);
+	  text("'p' to display or hide particles\n'c' to display or hide connections\n'n' for new graph\n'2'-'8' to create new graph with specified no. of clusters",10,20);
 	}
 
 	// Key press commands
-	public void keyPressed() {
-	  if (key == 'c') {
-	    showPhysics = !showPhysics;
-	    if (!showPhysics) showParticles = true;
-	  } 
-	  else if (key == 'p') {
-	    showParticles = !showParticles;
-	    if (!showParticles) showPhysics = true;
-	  } 
-	  else if (key == 'n') {
-	    newGraph();
-	  }
+	public void keyPressed() 
+	{
+		if(key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8')
+		{
+			amountOfClusters = Integer.parseInt(Character.toString(key));
+			newGraph();
+			//System.out.println("amount of clusters changed to " + amountOfClusters);
+		}
+		else if (key == 'c') {
+		  showPhysics = !showPhysics;
+		  if (!showPhysics) showParticles = true;
+		} 
+		else if (key == 'p') {
+		  showParticles = !showParticles;
+		  if (!showParticles) showPhysics = true;
+		} 
+		else if (key == 'n') {
+		  newGraph();
+		}
 	}
 }
