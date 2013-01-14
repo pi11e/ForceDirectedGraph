@@ -110,7 +110,15 @@ public class Cluster
 			  nodeVectors.add(n.getPreviousPosition());
 		  }
 		  
+		  
+		  
 		  Polygon2D circumference = new Polygon2D(nodeVectors);
+		  
+		  /*
+		  parent.fill(255,150); // first parameter is used as gray scale value; 0 is dark gray, 255 is white
+		    parent.stroke(0);
+		    parent.ellipse(circumference.getCentroid().x,circumference.getCentroid().y,16,16);
+		  */
 		  return circumference.getCentroid();
 	  }
 	  

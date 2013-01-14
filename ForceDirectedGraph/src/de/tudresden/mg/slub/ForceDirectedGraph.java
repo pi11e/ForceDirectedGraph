@@ -11,7 +11,8 @@ import toxi.physics2d.*;
 public class ForceDirectedGraph extends PApplet 
 {
 	private int amountOfClusters = 3;
-
+	private Cluster nearestCluster = null;
+	
 	// Reference to physics world
 	public VerletPhysics2D physics;
 
@@ -132,20 +133,64 @@ public class ForceDirectedGraph extends PApplet
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-
+		// TODO Auto-generated method stub
 		super.mouseMoved(e);
+		//findNearestCluster(e);
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		super.mouseClicked(e);
 		findNearestCluster(e);
 	}
 	
 	private void findNearestCluster(MouseEvent e)
 	{
+		// lazy init with cluster 0
+		if(nearestCluster == null)
+			nearestCluster = this.clusters.get(0);
+		
+		int nearestClusterIndex = -1;
+		float distanceToNearestCluster = Float.MAX_VALUE;
 		
 		for(int i = 0; i < this.clusters.size(); i++)
 		{
 			Cluster c = this.clusters.get(i);
+			
+			
+			
 			float distanceToClusterCenter = dist(c.getCenter().x, c.getCenter().y, e.getX(), e.getY());
 			System.out.println("Distance to cluster " + i + " = " + distanceToClusterCenter);
+			if(distanceToClusterCenter < distanceToNearestCluster)
+			{
+				nearestCluster = c;
+				nearestClusterIndex = i;
+				//System.out.println("Nearest cluster index = " + nearestClusterIndex);
+				
+
+			}
 		}
+		
+		if(e.getButton() == MouseEvent.BUTTON3)
+		{
+			// color nearest cluster white, all others gray
+			for(Cluster c : clusters)
+			{
+				for(Node n : c.getNodes())
+				{
+					n.setGrayValue(0);
+				}
+			}
+			
+			for(Node n : clusters.get(nearestClusterIndex).getNodes())
+			{
+				n.setGrayValue(255);
+			}
+		}
+
+		
+		
 		//System.out.println("mouse moved; position = (" + e.getX() + "," + e.getY() + ")");
 	}
 	
