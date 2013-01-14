@@ -36,7 +36,7 @@ public class Cluster
 	      // We can't put them right on top of each other
 	      nodes.add(new Node(p, center.add(Vec2D.randomVector())));
 	    }
-
+	    
 	    // Connect all the nodes with a Spring
 	    for (int i = 1; i < nodes.size(); i++) {
 	      VerletParticle2D pi = (VerletParticle2D) nodes.get(i);
@@ -56,7 +56,7 @@ public class Cluster
 	    }
 	  }
 
-	  // This functons connects one cluster to another
+	  // This function connects one cluster to another
 	  // Each point of one cluster connects to each point of the other cluster
 	  // The connection is a "VerletMinDistanceSpring"
 	  // A VerletMinDistanceSpring is a string which only enforces its rest length if the 

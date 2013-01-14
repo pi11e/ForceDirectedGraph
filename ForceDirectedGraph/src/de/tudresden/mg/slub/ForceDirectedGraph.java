@@ -1,5 +1,6 @@
 package de.tudresden.mg.slub;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import processing.core.*;
@@ -9,10 +10,6 @@ import toxi.physics2d.*;
 @SuppressWarnings("serial")
 public class ForceDirectedGraph extends PApplet 
 {
-	public static void main(String args[]) {
-	    PApplet.main(new String[] { "--present", "de.tudresden.mg.slub.ForceDirectedGraph" });
-	  }
-	
 	private int amountOfClusters = 3;
 
 	// Reference to physics world
@@ -27,6 +24,11 @@ public class ForceDirectedGraph extends PApplet
 
 	// Font
 	PFont f;
+	
+	public static void main(String args[]) {
+	    PApplet.main(new String[] { "--present", "de.tudresden.mg.slub.ForceDirectedGraph" });
+	  }
+
 
 	public void setup() {
 	  size(600,600);
@@ -52,12 +54,12 @@ public class ForceDirectedGraph extends PApplet
 	  clusters = new ArrayList<Cluster>();
 
 	  // Create 8 random clusters
-	  for (int i = 0; i < 8; i++) 
+	  for (int i = 0; i < amountOfClusters; i++) 
 	  {
 	    Vec2D center = new Vec2D(width/2,height/2);
 	    
 	    
-	    clusters.add(new Cluster(this, amountOfClusters,(float)random(20,100),center));
+	    clusters.add(new Cluster(this, (int)random(3,8),(float)random(20,100),center));
 	  }
 
 	  //	All clusters connect to all clusters	
@@ -127,4 +129,17 @@ public class ForceDirectedGraph extends PApplet
 		  newGraph();
 		}
 	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+
+		super.mouseMoved(e);
+		findNearestCluster(e);
+	}
+	
+	private void findNearestCluster(MouseEvent e)
+	{
+		
+	}
+	
 }
