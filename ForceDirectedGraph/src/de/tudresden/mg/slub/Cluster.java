@@ -9,24 +9,21 @@ import toxi.physics2d.*;
 public class Cluster 
 {
 	private ForceDirectedGraph parent;
-	
-	Cluster(ForceDirectedGraph p)
-	{
-		parent = p;
-	}
+	private Vec2D center;
 	
 	// A cluster is a grouping of nodes
-	  ArrayList<Node> nodes;
+	ArrayList<Node> nodes;
 
-	  float diameter;
+	float diameter;
 
-	  // We initialize a Cluster with a number of nodes, a diameter, and centerpoint
-	  Cluster(ForceDirectedGraph p, int numberOfNodes, float clusterDiameter, Vec2D center)
-	  {
-		  parent = p;
-
-	    // Initialize the ArrayList
-	    nodes = new ArrayList<Node>();
+	// We initialize a Cluster with a number of nodes, a diameter, and center
+	public Cluster(ForceDirectedGraph p, int numberOfNodes, float clusterDiameter, Vec2D clusterCenter)
+	{
+		parent = p;
+		center = clusterCenter;
+		
+		// Initialize the ArrayList
+		nodes = new ArrayList<Node>();
 
 	    // Set the diameter
 	    diameter = clusterDiameter;
@@ -101,8 +98,21 @@ public class Cluster
 	    }
 	  }
 
-	  ArrayList<Node> getNodes() {
+	  public ArrayList<Node> getNodes() {
 	    return nodes;
 	  }
+	  
+	  public Vec2D getCenter()
+	  {
+		  ArrayList<Vec2D> nodeVectors = new ArrayList<Vec2D>();
+		  for(Node n : this.nodes)
+		  {
+			  nodeVectors.add(n.getPreviousPosition());
+		  }
+		  
+		  Polygon2D circumference = new Polygon2D(nodeVectors);
+		  return circumference.getCentroid();
+	  }
+	  
 
 }

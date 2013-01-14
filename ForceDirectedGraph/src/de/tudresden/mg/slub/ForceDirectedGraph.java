@@ -140,6 +140,14 @@ public class ForceDirectedGraph extends PApplet
 	private void findNearestCluster(MouseEvent e)
 	{
 		
+		for(int i = 0; i < this.clusters.size(); i++)
+		{
+			Cluster c = this.clusters.get(i);
+			float distanceToClusterCenter = dist(c.getCenter().x, c.getCenter().y, e.getX(), e.getY());
+			System.out.println("Distance to cluster " + i + " = " + distanceToClusterCenter);
+		}
+		//System.out.println("mouse moved; position = (" + e.getX() + "," + e.getY() + ")");
 	}
+	
 	
 }
