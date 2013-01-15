@@ -1,0 +1,12 @@
+Hello and welcome to my first GitHub repository!
+
+The purpose of this repository is twofold.
+
+First, it constitutes a working eclipse java project setup to work with 
+processing and the toxiclib physics/math library to display the force-directed graph
+sample as presented by the veritable Mr. Daniel Shiffman of great Processing fame.
+Original homepage for the sample:
+http://www.shiffman.net/itp/classes/nature/toxiclibs_2010/forcedirectedgraph/
+
+Second, I am trying to create a prototype for a graph-based data visualization technique 
+involving gesture control via Kinect for Windows(R) for my Master's thesis.
